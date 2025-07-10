@@ -3,7 +3,8 @@
 
 **🐛 Corrections**
  - Correction du taux de remplissage des bilans et ajout de statistiques.
-
+ - Correction des informations de rendez-vous qui ne sont pas enregistrées.
+ 
 **🚀 Nouveautés**
  - Les réservations des évènements passés sont masquées aux utilisateurs.
 
