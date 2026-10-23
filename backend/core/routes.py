@@ -411,7 +411,7 @@ def confirm_reservation():
     event = resa.event
 
     try:
-        event.is_reservation_possible_for(resa.nb_participants, resa.email)
+        event.is_reservation_possible_for(resa.nb_participants, resa.email, False, True)
     except UserEventNbExceded:
         raise UserEventNbExcededUser
 
@@ -467,7 +467,7 @@ def update_reservation(reservation_id):
             skip_nb_max_per_user = False
 
         event.is_reservation_possible_for(
-            nb_participants_to_test, reservation.email, skip_nb_max_per_user
+            nb_participants_to_test, reservation.email, skip_nb_max_per_user, False, True
         )
     except UserEventNbExceded:
         raise UserEventNbExcededAdmin
