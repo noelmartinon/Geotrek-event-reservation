@@ -411,7 +411,7 @@ def confirm_reservation():
     event = resa.event
 
     try:
-        event.is_reservation_possible_for(resa.nb_participants, resa.email)
+        event.is_reservation_possible_for(resa.nb_participants, resa.email, False, True)
     except UserEventNbExceded:
         raise UserEventNbExcededUser
 

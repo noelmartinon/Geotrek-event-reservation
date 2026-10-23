@@ -174,7 +174,7 @@ class GTEvents(db.Model):
     def massif(cls):
         return func.animations.get_secteur_name(cls.id)
 
-    def is_reservation_possible_for(self, nb_people, email, skip_nb_max_per_user=False):
+    def is_reservation_possible_for(self, nb_people, email, skip_nb_max_per_user=False, skip_nb_resa_per_user=False):
         #  Test si la réservation est possible pour cette animation
         # params :
         #   - nb_people:int = nombre de personne à inscrite
@@ -190,10 +190,14 @@ class GTEvents(db.Model):
         query = select(func.count(TReservations.id_reservation)).where(
             TReservations.email == email,
             TReservations.id_event == self.id,
+            TReservations.cancelled == False,
         )
         nb_reservation_current_event = db.session.scalar(query)
 
-        if nb_reservation_current_event:
+        if (
+            nb_reservation_current_event
+            and not skip_nb_resa_per_user
+        ):
             raise UserEventAlreadyRegistered
 
         # Test nombre de reservation par utilisateur
